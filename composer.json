@@ -1,5 +1,5 @@
 {
-    "name": "bennetgallein/pay.g2a.com-php-sdk",
+    "name": "konrad-ch/pay.g2a.com-php-sdk",
     "description": "A PHP SDK for the G2A.com payment gateway",
     "type": "library",
     "require": {
