@@ -69,6 +69,12 @@ class Payment {
      */
     private $cartType;
     /**
+     * Payment method or group to display (values: paypal_gateway, skrill or card)
+     *
+     * @var string
+     */
+    private $processPayment;
+    /**
      * Customer IPv4 address
      *
      * @var string
@@ -104,7 +110,9 @@ class Payment {
                     'url_failure' => $this->getFailureUrl(),
                     'url_ok' => $this->getOkUrl(),
                     'items' => $this->_getItems(),
-                    'customer_ip_address' => $this->getCustomerIPAddress()
+                    'customer_ip_address' => $this->getCustomerIPAddress(),
+                    'cart_type' => $this->getCartType(),
+                    'process_payment' => $this->getProcessPayment()
                 ], [], true, false);
             return $res;
         } catch (\Exception $e) {
@@ -391,6 +399,25 @@ class Payment {
 
 		return $this;
 	}
+
+    /**
+     * Get payment method or group: paypal_gateway, skrill or card
+     *
+     * @return string
+     */
+	public function getProcessPayment() {
+	    return $this->processPayment;
+    }
+
+    /**
+     * @param string $processPayment Payment method or group: paypal_gateway, skrill or card
+     * @return self
+     */
+	public function setProcessPayment(string $processPayment) {
+	    $this->processPayment = $processPayment;
+
+	    return $this;
+    }
 
 	/**
 	 * Get customer IPv4 address

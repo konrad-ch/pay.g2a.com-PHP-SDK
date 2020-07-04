@@ -3,6 +3,6 @@ namespace G2APay\Types\Enums;
 
 class ProductType {
 
-    public const PHYSICAL = "physical";
-    public const DIGITAL = "digital";
+    const PHYSICAL = "physical";
+    const DIGITAL = "digital";
 }
