@@ -91,49 +91,41 @@ class Payment {
     }
 
     public function create() {
-
         $restService = new RestService();
         
-        try {
-            $res = $restService
-                ->setEndpoint($this->env ? URLs::prod_quote : URLs::sandbox_quote)
-                ->setRequestHeaders([
-                    'Authorization' => $this->header
-                ])
-                ->post('/index/createQuote', [
-                    'api_hash' => $this->hash,
-                    'hash' => $this->getCalculatedHash(),
-                    'order_id' => $this->getOrderId(),
-                    'amount' => $this->getAmount(),
-                    'currency' => $this->getCurrency(),
-                    'email' => $this->getEmail(),
-                    'url_failure' => $this->getFailureUrl(),
-                    'url_ok' => $this->getOkUrl(),
-                    'items' => $this->_getItems(),
-                    'customer_ip_address' => $this->getCustomerIPAddress(),
-                    'cart_type' => $this->getCartType(),
-                    'process_payment' => $this->getProcessPayment()
-                ], [], true, false);
-            return $res;
-        } catch (\Exception $e) {
-            dump($e);
-        }
+        $res = $restService
+            ->setEndpoint($this->env ? URLs::prod_quote : URLs::sandbox_quote)
+            ->setRequestHeaders([
+                'Authorization' => $this->header
+            ])
+            ->post('/index/createQuote', [
+                'api_hash' => $this->hash,
+                'hash' => $this->getCalculatedHash(),
+                'order_id' => $this->getOrderId(),
+                'amount' => $this->getAmount(),
+                'currency' => $this->getCurrency(),
+                'email' => $this->getEmail(),
+                'url_failure' => $this->getFailureUrl(),
+                'url_ok' => $this->getOkUrl(),
+                'items' => $this->_getItems(),
+                'customer_ip_address' => $this->getCustomerIPAddress(),
+                'cart_type' => $this->getCartType(),
+                'process_payment' => $this->getProcessPayment()
+            ], [], true, false);
+        return $res;
+
     }
 
     public function getPayment(string $token) {
         $resService = new RestService();
 
-        try {
-            $res = $resService
-                ->setEndpoint($this->env ? URLs::prod_rest : URLs::sandbox_rest)
-                ->setRequestHeaders([
-                    'Authorization' => $this->header
-                ])
-                ->get("/transactions/${token}");
-            return $res;
-        } catch (\Exception $e) {
-            dump($e);
-        } 
+        $res = $resService
+            ->setEndpoint($this->env ? URLs::prod_rest : URLs::sandbox_rest)
+            ->setRequestHeaders([
+                'Authorization' => $this->header
+            ])
+            ->get("/transactions/${token}");
+        return $res;
     } 
 
     public function addItem(Item $item) {
