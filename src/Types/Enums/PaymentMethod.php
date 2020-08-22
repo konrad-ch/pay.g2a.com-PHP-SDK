@@ -12,6 +12,7 @@ class PaymentMethod {
     const PAYPAL = "paypal_gateway";
     const SKRILL = "skrill";
     const SKRILL_NETELLER = "skrill_neteller";
+    const TRUSTLY = "trustly";
     const DINERS_CLUB_INTERNATIONAL = "boacompra_diners";
     const AMERICAN_EXPRESS = "boacompra_amex";
     const REDCOMPA = "boacompra_redcompra";
